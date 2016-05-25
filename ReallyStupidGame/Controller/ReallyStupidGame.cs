@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 using System.Collections.Generic;
 using ReallyStupidGame.Model;
 using ReallyStupidGame.View;
@@ -58,6 +60,15 @@ namespace ReallyStupidGame
 
 		private Texture2D explosionTexture;
 		private List<Animation> explosions;
+
+		// The sound that is played when a laser is fired
+		private SoundEffect laserSound;
+
+		// The sound used when the player or an enemy dies
+		private SoundEffect explosionSound;
+
+		// The music played during gameplay
+		private Song gameplayMusic;
 
 		public ReallyStupidGame ()
 		{
@@ -136,7 +147,33 @@ namespace ReallyStupidGame
 
 			explosionTexture = Content.Load<Texture2D>("Animation/explosion");
 
+			// Load the music
+			gameplayMusic = Content.Load<Song>("sound/gameMusic");
+
+			// Load the laser and explosion sound effect
+			laserSound = Content.Load<SoundEffect>("sound/laserFire");
+			explosionSound = Content.Load<SoundEffect>("sound/explosion");
+
+			// Start the music right away
+			PlayMusic(gameplayMusic);
+
 		}
+
+		private void PlayMusic(Song song)
+		{
+			// Due to the way the MediaPlayer plays music,
+			// we have to catch the exception. Music will play when the game is not tethered
+			try
+			{
+				// Play the music
+				MediaPlayer.Play(song);
+
+				// Loop the currently playing song
+				MediaPlayer.IsRepeating = true;
+			}
+			catch { }
+		}
+
 
 		private void UpdatePlayer(GameTime gameTime)
 		{
@@ -180,9 +217,12 @@ namespace ReallyStupidGame
 
 				// Add the projectile, but add it to the front and center of the player
 				AddProjectile(player.Position + new Vector2(player.Width / 2, 0));
+
+				// Play the laser sound
+				laserSound.Play();
 			}
 		}
-
+			
 		/// <summary>
 		/// Allows the game to run logic such as updating the world,
 		/// checking for collisions, gathering input, and playing audio.
@@ -377,6 +417,9 @@ namespace ReallyStupidGame
 					{
 						// Add an explosion
 						AddExplosion(enemies[i].Position);
+
+						// Play the explosion sound
+						explosionSound.Play();
 					}
 					enemies.RemoveAt(i);
 				} 

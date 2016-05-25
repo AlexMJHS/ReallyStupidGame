@@ -53,7 +53,7 @@ namespace ReallyStupidGame.Model
 
 
 			// Set the health of the enemy
-			Health = 10;
+			Health = 5;
 
 			// Set the amount of damage the enemy can do
 			Damage = 10;
