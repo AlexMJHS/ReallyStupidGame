@@ -97,9 +97,9 @@ namespace ReallyStupidGame.View
 			}
 
 			// The state of the Animation
-			private bool Active;
+			private bool active;
 
-			public bool active
+			public bool Active
 			{
 				get { return active; }
 				set { active = value; }
