@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Audio;
 using System.Collections.Generic;
 using ReallyStupidGame.Model;
 using ReallyStupidGame.View;
+using System.Collections.Generic;
 
 namespace ReallyStupidGame
 {
@@ -19,7 +20,8 @@ namespace ReallyStupidGame
 	{
 		private GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;
-
+		private Timespan previousRustySpoonTime;
+		private Viewport viewport;
 		private Player player;
 
 		// Keyboard states used to determine key presses
@@ -39,6 +41,10 @@ namespace ReallyStupidGame
 		// Parallaxing Layers
 		private ParallaxingBackground bgLayer1;
 		private ParallaxingBackground bgLayer2;
+
+		private TimeSpan rustySpoonFireTime;
+		private List<RustySpoon> rustySpoons;
+		private Texture2D rustySpoonTexture;
 
 		// Enemies
 		private Texture2D enemyTexture;
@@ -123,6 +129,9 @@ namespace ReallyStupidGame
 			//Set player's score to zero
 			score = 0;
 
+			rustySpoonFireTime = TimeSpan.FromSeconds (.3f);
+			rustySpoons = new List<RustySpoons>
+
 			base.Initialize ();
 		}
 
@@ -146,6 +155,8 @@ namespace ReallyStupidGame
 				+ GraphicsDevice.Viewport.TitleSafeArea.Height / 2);
 			player.Initialize(playerAnimation, playerPosition);
 
+
+			rustySpponTexture= Content.Load<Texture2D> ("Texture/rustySpoon")
 			// Load the parallaxing background
 			bgLayer1.Initialize(Content, "Texture/bgLayer1", GraphicsDevice.Viewport.Width, -1);
 			bgLayer2.Initialize(Content, "Texture/bgLayer2", GraphicsDevice.Viewport.Width, -2);
@@ -224,6 +235,23 @@ namespace ReallyStupidGame
 			// Make sure that the player does not go out of bounds
 			player.Position.X = MathHelper.Clamp(player.Position.X, 0,GraphicsDevice.Viewport.Width - player.Width);
 			player.Position.Y = MathHelper.Clamp(player.Position.Y, 0,GraphicsDevice.Viewport.Height - player.Height);
+
+			if(gameTime.ElapsedGameTime - previousRustySpoonTime > rustySpoonFireTime && currentKeyboardState.IsKeyDown ((Keys.U)))
+			{
+				AddRustySpoon (player.Position + new Vector2 (player.Width / 2, 0));
+			}
+
+			private void AddRustySpoon(Vector2 position)
+			{
+				RustySpoonWeapon soundBlaster = new RustySpoonWeapon();
+				soundBlaster.Initialize(GraphicsDevice.Viewport, rustySpoonTexture, position);
+				rustySpoons.Add(soundBlaster);
+			}
+
+			private void updateRustySpoons()
+			{
+				for(int i = rustySpoons.Count)
+			}
 
 			// Fire only every interval we set as the fireTime
 			if (gameTime.TotalGameTime - previousFireTime > fireTime)
@@ -486,6 +514,11 @@ namespace ReallyStupidGame
 			for (int i = 0; i < projectiles.Count; i++)
 			{
 				projectiles[i].Draw(spriteBatch);
+			}
+
+			for int indexer = 0; indexer < rustySpoons.Count; index++)
+			{
+				rustySpoons [index].Draw (spriteBatch);
 			}
 
 			// Draw the Player

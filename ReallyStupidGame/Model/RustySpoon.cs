@@ -12,6 +12,7 @@ namespace ReallyStupidGame
 		private int damage;
 		private float rustySpoonSpeed;
 		private Vector2 position;
+		private bool active;
 
 		public Texture2D Texture
 		{
@@ -37,8 +38,9 @@ namespace ReallyStupidGame
 			set { position = value; }
 		}
 
-		public void Initialize(Viewport viewport, Texture2D texture, Vector2 position)
+		public void Initialize (Viewport viewport, Texture2D texture, Vector2 position)
 		{
+			this.viewport = viewPort;
 			this.texture = texture;
 			this.position = position;
 			this.damage = 5;
