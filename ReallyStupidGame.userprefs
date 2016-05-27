@@ -1,14 +1,15 @@
 ﻿<Properties StartupItem="ReallyStupidGame/ReallyStupidGame.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ReallyStupidGame/Model/Projectile.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ReallyStupidGame/Controller/ReallyStupidGame.cs">
     <Files>
-      <File FileName="ReallyStupidGame/Controller/ReallyStupidGame.cs" Line="159" Column="28" />
+      <File FileName="ReallyStupidGame/Controller/ReallyStupidGame.cs" Line="161" Column="48" />
       <File FileName="ReallyStupidGame/Controller/Program.cs" Line="1" Column="1" />
       <File FileName="ReallyStupidGame/Model/Player.cs" Line="1" Column="1" />
-      <File FileName="ReallyStupidGame/Model/Enemy.cs" Line="56" Column="14" />
-      <File FileName="ReallyStupidGame/View/Animation.cs" Line="187" Column="1" />
+      <File FileName="ReallyStupidGame/Model/Enemy.cs" Line="1" Column="1" />
+      <File FileName="ReallyStupidGame/View/Animation.cs" Line="1" Column="1" />
       <File FileName="ReallyStupidGame/View/ParallaxingBackground.cs" Line="1" Column="1" />
-      <File FileName="ReallyStupidGame/Model/Projectile.cs" Line="69" Column="69" />
+      <File FileName="ReallyStupidGame/Model/Projectile.cs" Line="70" Column="4" />
+      <File FileName="ReallyStupidGame/Model/RustySpoon.cs" Line="1" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

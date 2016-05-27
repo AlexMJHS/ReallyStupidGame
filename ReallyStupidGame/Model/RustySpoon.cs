@@ -8,64 +8,52 @@ namespace ReallyStupidGame
 {
 	public class RustySpoon
 	{
-		// Image representing the Projectile
-		public Texture2D Texture;
+		private Texture2D texture;
+		private int damage;
+		private float rustySpoonSpeed;
+		private Vector2 position;
 
-		// Position of the Projectile relative to the upper left side of the screen
-		public Vector2 Position;
-
-		// State of the Projectile
-		public bool Active;
-
-		// The amount of damage the projectile can inflict to an enemy
-		public int Damage;
-
-		// Represents the viewable boundary of the game
-		Viewport viewport;
-
-		// Get the width of the projectile ship
-		public int Width
+		public Texture2D Texture
 		{
-			get { return Texture.Width; }
+			get { return texture; }
+			set { texture = value; }
 		}
 
-		// Get the height of the projectile ship
-		public int Height
+		public int Damage
 		{
-			get { return Texture.Height; }
+			get { return damage; }
+			set { damage = value; }
 		}
 
-		// Determines how fast the projectile moves
-		float projectileMoveSpeed;
+		public float RustySpoonSpeed
+		{
+			get { return rustySpoonSpeed; }
+			set { rustySpoonSpeed = value; }
+		}
 
+		public Vector2 Position
+		{
+			get { return position; }
+			set { position = value; }
+		}
 
 		public void Initialize(Viewport viewport, Texture2D texture, Vector2 position)
 		{
-			Texture = texture;
-			Position = position;
-			this.viewport = viewport;
-
-			Active = true;
-
-			Damage = 4;
-
-			projectileMoveSpeed = 30f;
+			this.texture = texture;
+			this.position = position;
+			this.damage = 5;
+			this.rustySpoonSpeed = .2;
 		}
 
 		public void Update()
 		{
-			// Projectiles always move to the right
-			Position.X += projectileMoveSpeed;
-
-			// Deactivate the bullet if it goes out of screen
-			if (Position.X + Texture.Width / 2 > viewport.Width)
-				Active = false;
+			Position.X += rustySpoonSpeed;
+			Position.Y += .25;
 		}
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(Texture, Position, null, Color.White, 0f,
-				new Vector2(Width / 2, Height / 2), 1f, SpriteEffects.None, 0f);
+			spriteBatch.Draw(Texture, Position, null, Color.White, position.Y*3, Vector2.Zero, 0f);
 		}
 
 		public RustySpoon ()

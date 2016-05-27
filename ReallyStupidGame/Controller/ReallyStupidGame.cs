@@ -54,6 +54,9 @@ namespace ReallyStupidGame
 		private Texture2D projectileTexture;
 		private List<Projectile> projectiles;
 
+		private Texture2D spoonTexture;
+		private List<RustySpoon> spoons;
+
 		// The rate of fire of the player laser
 		private TimeSpan fireTime;
 		private TimeSpan previousFireTime;
@@ -151,7 +154,9 @@ namespace ReallyStupidGame
 
 			enemyTexture = Content.Load<Texture2D>("Animation/mineAnimation");
 
-			projectileTexture = Content.Load<Texture2D>("Texture/laser");
+			spoonTexture = Content.Load<Texture2D>("Texture/spoon");
+
+			//projectileTexture = Content.Load<Texture2D>("Texture/laser");
 
 			explosionTexture = Content.Load<Texture2D>("Animation/explosion");
 
@@ -370,6 +375,13 @@ namespace ReallyStupidGame
 			Projectile projectile = new Projectile(); 
 			projectile.Initialize(GraphicsDevice.Viewport, projectileTexture,position); 
 			projectiles.Add(projectile);
+		}
+
+		private void AddSpoon(Vector2 position)
+		{
+			RustySpoon spoon = new RustySpoon(); 
+			spoon.Initialize(GraphicsDevice.Viewport, spoonTexture,position); 
+			spoons.Add(spoon);
 		}
 
 		private void UpdateExplosions(GameTime gameTime)
